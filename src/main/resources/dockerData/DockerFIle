@@ -1,0 +1,7 @@
+FROM mysql
+
+ENV MYSQL_ROOT_PASSWORD=root
+ENV MYSQL_ALLOW_EMPTY_PASSWORD = false
+ENV MYSQL_ALLOW_EMPTY_PASSWORD = false
+
+COPY ./sqlScripts/ /docker-entrypoint-initdb.d/
