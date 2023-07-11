@@ -43,4 +43,26 @@ CREATE TABLE `order` (
   FOREIGN KEY (masterID) REFERENCES master(ID)
 );
 
+insert into customer (first_name, last_name, phone_number)
+values ('Guy','Elliott','+375291236987') ,
+       ('Charley','Christian','+375444125478'),
+       ('Yuvraj','Johns', '+375447874123');
+
+insert into master (first_name, last_name, phone_number)
+values ('Zachery','King','+375294582369') ,
+       ('Preston','Howard','+375295582261'),
+       ('Marshall','Spence', '+375295242665');
+
+insert into service (name, cost)
+values ('Cheap service','100'),
+       ('Middle cost service','500'),
+       ('Expensive ','15000');
+
+insert into service_provider(serviceID, masterID)
+VALUES  (1,1),
+        (2,2),
+        (3,3),
+        (1,2),
+        (1,3);
+
 

@@ -20,7 +20,7 @@ public class HibernateConfig {
         driverManagerDataSource.setPassword("root"); //should be encrypted
         driverManagerDataSource.setUrl(
                 "jdbc:mysql://localhost:3307/application?createDatabaseIfNotExist=false" +
-                        "&useSSL=false&allowPublicKeyRetrieval=true");
+                        "&useSSL=false&allowPublicKeyRetrieval=true"); //should be encrypted
 
         return driverManagerDataSource;
     }
