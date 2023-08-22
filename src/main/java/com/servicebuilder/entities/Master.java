@@ -48,4 +48,8 @@ public class Master extends AbstractEntity {
             inverseJoinColumns = @JoinColumn(name = "serviceID"))
     @JsonIgnore
     private List<Service> services;
+
+    @Column(name = "calendarID")
+    @JsonIgnore
+    private String calendarID;
 }

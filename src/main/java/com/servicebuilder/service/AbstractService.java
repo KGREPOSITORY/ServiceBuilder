@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class AbstractService<E extends AbstractEntity,
         R extends CommonRepository<E>>
@@ -19,8 +20,8 @@ public class AbstractService<E extends AbstractEntity,
     }
 
     @Override
-    public void save(E entity) {
-        repository.save(entity);
+    public E save(E entity) {
+        return repository.save(entity);
     }
 
     @Override
@@ -32,7 +33,7 @@ public class AbstractService<E extends AbstractEntity,
 
     @Override
     public E getById(long id) {
-        return repository.findById(id).orElseThrow();
+        return repository.findById(id).orElseThrow(); //tbd
     }
 
     @Override
@@ -42,6 +43,7 @@ public class AbstractService<E extends AbstractEntity,
 
     @Override
     public void deleteById(long id) {
+        repository.findById(id).orElseThrow(NoSuchElementException::new); //tbd
         repository.deleteById(id);
     }
 

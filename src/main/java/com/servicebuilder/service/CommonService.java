@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CommonService <E extends AbstractEntity>{
 
-    void save (E entity);
+    E save (E entity);
 
     List<E> getAll();
 

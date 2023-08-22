@@ -17,19 +17,19 @@ public interface CommonController<E extends AbstractEntity> {
     @PostMapping
     ResponseEntity<E> createEntity(@Valid @RequestBody E entity);
 
-    @GetMapping("/={id}")
+    @GetMapping("/id={id}")
     ResponseEntity<E> getEntityById(@PathVariable long id);
 
     @GetMapping
     ResponseEntity<List<E>> getAll();
 
-    @DeleteMapping("/={id}")
+    @DeleteMapping("/id={id}")
     ResponseEntity<E> deleteEntityById(@PathVariable long id);
 
     @PatchMapping
     ResponseEntity<E> updateEntity(@RequestBody E entity);
 
-    @PatchMapping("/={id}")
+    @PatchMapping("/id={id}")
     ResponseEntity<E> updateEntityById(@RequestBody E entity, @PathVariable long id);
 
 

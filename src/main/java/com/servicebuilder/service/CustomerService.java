@@ -13,9 +13,9 @@ public class CustomerService extends AbstractService<Customer, CustomerRepositor
     }
 
     @Override
-    public void save(Customer entity) {
+    public Customer save(Customer entity) {
         if (!repository.isCustomerExist(entity)) {
-            super.save(entity);
+            return super.save(entity);
         } else {
             throw new EntityAlreadyExistException(
                     "Customer with first name : " + entity.getFirstName()

@@ -15,13 +15,15 @@ CREATE TABLE master (
   ID bigint PRIMARY KEY AUTO_INCREMENT,
   first_name varchar(255),
   last_name varchar(255),
-  phone_number varchar(20)
+  phone_number varchar(20),
+  calendarID varchar(255)
 );
 
 CREATE TABLE service (
   ID bigint PRIMARY KEY AUTO_INCREMENT,
   name varchar(50),
-  cost double
+  cost double,
+  execution_time bigint
 );
 
 CREATE TABLE service_provider (
@@ -38,6 +40,7 @@ CREATE TABLE `order` (
   serviceID bigint,
   masterID bigint,
   `time` TIMESTAMP,
+  eventID varchar(255),
   FOREIGN KEY (customerID) REFERENCES customer(ID),
   FOREIGN KEY (serviceID) REFERENCES service(ID),
   FOREIGN KEY (masterID) REFERENCES master(ID)
@@ -53,10 +56,10 @@ values ('Zachery','King','+375294582369') ,
        ('Preston','Howard','+375295582261'),
        ('Marshall','Spence', '+375295242665');
 
-insert into service (name, cost)
-values ('Cheap service','100'),
-       ('Middle cost service','500'),
-       ('Expensive ','15000');
+insert into service (name, cost, execution_time)
+values ('Cheap service','100', '1800000'),
+       ('Middle cost service','500', '600000'),
+       ('Expensive ','15000', '3000000');
 
 insert into service_provider(serviceID, masterID)
 VALUES  (1,1),

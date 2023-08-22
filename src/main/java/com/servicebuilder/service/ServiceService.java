@@ -12,9 +12,9 @@ public class ServiceService extends AbstractService<Service, ServiceRepository> 
     }
 
     @Override
-    public void save(Service entity) {
+    public Service save(Service entity) {
         if (!repository.isServiceExist(entity)) {
-            super.save(entity);
+           return super.save(entity);
         }else {
             throw new EntityAlreadyExistException("Service with "+entity.getName()+" already exist");
         }

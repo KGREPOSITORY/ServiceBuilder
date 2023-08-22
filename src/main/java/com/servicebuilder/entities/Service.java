@@ -1,13 +1,11 @@
 package com.servicebuilder.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
@@ -16,6 +14,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -34,9 +33,13 @@ public class Service extends AbstractEntity {
     @NotNull
     private double cost;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "service")
+    @Column(name = "execution_time")
+    @NotNull
+    private long executionTimeMillis;
+
+    @OneToMany(mappedBy = "service", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
-    private List<Order> order;
+    private List<Order> order = new ArrayList<>();
 
     @ManyToMany(mappedBy = "services")
     private List<Master> masters;
