@@ -36,7 +36,7 @@ public class Customer extends AbstractEntity {
     @NotNull
     private String phoneNumber;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "customer")
     @JsonIgnore
 //    @JsonBackReference
     private List<Order> orders;

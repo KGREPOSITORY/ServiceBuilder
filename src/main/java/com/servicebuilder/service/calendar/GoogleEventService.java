@@ -1,11 +1,15 @@
 package com.servicebuilder.service.calendar;
 
+import com.google.api.client.util.DateTime;
 import com.google.api.services.calendar.Calendar;
 import com.google.api.services.calendar.model.Event;
+import com.google.api.services.calendar.model.EventDateTime;
+import com.servicebuilder.entities.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -71,5 +75,23 @@ public class GoogleEventService implements EventService {
             e.printStackTrace(); //tbd
         }
         return null; //tbd
+    }
+
+    public Order createEventForOrder(Order order){
+        Event event = new Event();
+        EventDateTime startTime = new EventDateTime()
+                .setDateTime(new DateTime(order.getTime()));
+        EventDateTime endTime = new EventDateTime()
+                .setDateTime(new DateTime(new Date(startTime
+                        .getDateTime()
+                        .getValue() + order.getService()
+                        .getExecutionTimeMillis())));
+        event.setStart(startTime);
+        event.setEnd(endTime);
+        event.setDescription(order.getDescription());
+        event.setSummary(order.getService().getName());
+        event = createEvent(order.getMaster().getCalendarID(), event);
+        order.setEventID(event.getId());
+        return order;
     }
 }

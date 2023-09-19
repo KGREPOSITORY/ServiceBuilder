@@ -1,9 +1,5 @@
 package com.servicebuilder;
 
-import com.google.api.client.util.DateTime;
-import com.google.api.services.calendar.model.Calendar;
-import com.google.api.services.calendar.model.Event;
-import com.google.api.services.calendar.model.EventDateTime;
 import com.servicebuilder.entities.Master;
 import com.servicebuilder.entities.Order;
 import com.servicebuilder.entities.Service;
@@ -12,8 +8,6 @@ import com.servicebuilder.service.calendar.GoogleEventService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.Date;
 
 @SpringBootTest
 class ServiceBuilderApplicationTests {

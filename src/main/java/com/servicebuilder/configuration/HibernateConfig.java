@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 
 @Configuration
-@EnableTransactionManagement
 public class HibernateConfig {
 
     @Bean

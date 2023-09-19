@@ -5,6 +5,7 @@ import com.servicebuilder.entities.Master;
 import com.servicebuilder.exception.EntityAlreadyExistException;
 import com.servicebuilder.repository.MasterRepository;
 import com.servicebuilder.service.calendar.GoogleCalendarService;
+import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +17,8 @@ public class MasterService extends AbstractService<Master, MasterRepository> {
     private final GoogleCalendarService googleCalendarService;
 
     @Autowired
-    public MasterService(MasterRepository repository,GoogleCalendarService googleCalendarService) {
-        super(repository);
+    public MasterService(MasterRepository repository, GoogleCalendarService googleCalendarService, EntityManager entityManager) {
+        super(repository, entityManager);
         this.googleCalendarService = googleCalendarService;
     }
 
