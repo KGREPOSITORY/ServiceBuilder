@@ -22,4 +22,6 @@ public interface MasterRepository extends CommonRepository<Master> {
             "set m.calendarID = :#{#calendarID} " +
             "where m.id = :#{#master.id}")
     void updateCalendarId(Master master,@Param("calendarID") String calendarID);
+
+    Master getMasterByCalendarID(String calendarId);
 }

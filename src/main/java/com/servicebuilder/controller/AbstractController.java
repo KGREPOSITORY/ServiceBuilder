@@ -12,7 +12,7 @@ public class AbstractController<E extends AbstractEntity,
         S extends CommonService<E>>
         implements CommonController<E> {
 
-    private final S service;
+    protected final S service;
 
     @Autowired
     public AbstractController(S service) {

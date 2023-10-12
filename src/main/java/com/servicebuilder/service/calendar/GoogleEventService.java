@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service(value = "GoogleEventService")
 public class GoogleEventService implements EventService {
@@ -102,12 +103,13 @@ public class GoogleEventService implements EventService {
         order.setEventID(event.getId());
         return order;
     }
+
     //I don't know how to simplify it
     public Map<String, FreeBusyCalendar> getFreeTimeSpecifiedTime(DateTime startDate, DateTime finishDate) {
         FreeBusyRequest freeBusyRequestInfo = new FreeBusyRequest();
-        freeBusyRequestInfo.setTimeMin(startDate);
-        freeBusyRequestInfo.setTimeMax(finishDate);
-        freeBusyRequestInfo.setTimeZone(timeZone);
+        freeBusyRequestInfo.setTimeMin(startDate)
+                .setTimeMax(finishDate)
+                .setTimeZone(timeZone);
 
         List<FreeBusyRequestItem> items = new ArrayList<>();
         CalendarList calendarList = googleCalendarService.getCalendarList();
@@ -126,5 +128,14 @@ public class GoogleEventService implements EventService {
             throw new RuntimeException(e); //tbd
         }
         return response.getCalendars();
+    }
+
+    public List<String> getFreeCalendarIds(DateTime startDate, DateTime finishDate) {
+        return getFreeTimeSpecifiedTime(startDate, finishDate)
+                .entrySet()
+                .stream()
+                .filter(entry -> entry.getValue().getBusy().isEmpty())
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
     }
 }

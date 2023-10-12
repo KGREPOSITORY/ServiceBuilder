@@ -3,12 +3,14 @@ package com.servicebuilder.service;
 import com.google.api.services.calendar.model.Calendar;
 import com.servicebuilder.entities.Master;
 import com.servicebuilder.exception.EntityAlreadyExistException;
+import com.servicebuilder.facade.MasterFacade;
 import com.servicebuilder.repository.MasterRepository;
 import com.servicebuilder.service.calendar.GoogleCalendarService;
 import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -46,9 +48,11 @@ public class MasterService extends AbstractService<Master, MasterRepository> {
             throw new EntityAlreadyExistException(
                     "Master with first name : " + entity.getFirstName()
                             + ", and last name " + entity.getLastName()
-                            + " already exist");
+                            + " already exist"); // tbd
         }
     }
 
-
+    public Master getMastersByCalendarId(String calendarId){
+        return repository.getMasterByCalendarID(calendarId);
+    }
 }
